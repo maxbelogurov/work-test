@@ -1,45 +1,28 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <text-tags/>
-    </v-main>
+    <v-container fluid="fluid" class="my-3">
+      <v-row class="pa-3">
+        <v-btn-toggle>
+          <v-btn color="primary"
+                 @click="tagsAlign(true)"
+                 :disabled="this.alignLeft"> Left
+          </v-btn>
+          <v-btn color="primary"
+                 @click="tagsAlign(false)"
+                 :disabled="!this.alignLeft">Justify
+          </v-btn>
+        </v-btn-toggle>
+      </v-row>
+      <text-tags v-bind:Tags="myTags"
+                 v-bind:Align="justify"></text-tags>
+      <v-row class="pa-3">
+        <p class="mt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+          labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+          eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+          mollit anim id est laborum.</p>
+      </v-row>
+    </v-container>
   </v-app>
 </template>
 
@@ -48,13 +31,46 @@ import TextTags from "@/components/TextTags";
 
 export default {
   name: 'App',
-
   components: {
     TextTags,
   },
-
   data: () => ({
-    //
+    alignLeft: true,
+    justify: 'start',
+    myTags: [
+      {
+        text: 'Площадка для парковки',
+        icon: 'mdi-alert'
+      },
+      {
+        text: 'Дом с красивыми видом',
+        icon: 'mdi-bookmark'
+      },
+      {
+        text: 'Вторичка'
+      },
+      {
+        text: 'Квартира'
+      },
+      {
+        text: 'Загородный дом',
+        icon: 'mdi-lightbulb'
+      },
+      {
+        text: 'С видом на море',
+        icon: 'mdi-atv'
+      },
+      {
+        text: 'Офисное здание',
+        icon: 'mdi-arrow-down-bold'
+      }
+    ]
   }),
+  methods: {
+    tagsAlign(b) {
+      this.alignLeft = b
+      b ? this.justify = 'start' : this.justify = 'space-between'
+    }
+  },
 };
 </script>

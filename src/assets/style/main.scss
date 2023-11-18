@@ -1,0 +1,15 @@
+.tags-container {
+  max-height: 1.5rem;
+  overflow: hidden;
+  &__item {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    gap: .5rem;
+    &__body {
+      display: flex;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+    }
+  }
+}
